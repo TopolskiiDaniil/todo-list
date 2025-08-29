@@ -10,12 +10,7 @@ interface Props {
 export const TodoItem: React.FC<Props> = ({ todo, toggleTodo }) => {
     return (
         <li className="todo-item">
-            <label
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    cursor: 'pointer'
-                }}>
+            <label>
                 <RoundCheckbox
                     checked={todo.completed}
                     onChange={() => toggleTodo(todo.id)}

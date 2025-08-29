@@ -18,14 +18,14 @@ export const useTodos = () => {
 
     const toggleTodo = (id: number) => {
         setTodos((prev) =>
-            prev.map((t) =>
-                t.id === id ? { ...t, completed: !t.completed } : t
+            prev.map((todo) =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
             )
         );
     };
 
     const clearCompleted = () => {
-        setTodos((prev) => prev.filter((t) => !t.completed));
+        setTodos((prev) => prev.filter((todo) => !todo.completed));
     };
 
     return { todos, addTodo, toggleTodo, clearCompleted };
