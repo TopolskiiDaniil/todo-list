@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { useTodos } from './hooks/useTodos';
 import { TodoItem } from './components/TodoItem';
 
-export type Filter = "all" | "active" | "completed";
+const Filter = {
+    ALL: 'All',
+    ACTIVE: 'Active',
+    COMPLETED: 'Completed'
+};
 
 const App: React.FC = () => {
     const { todos, addTodo, toggleTodo, clearCompleted } = useTodos();
-    const [filter, setFilter] = useState<Filter>("all");
+    const [filter, setFilter] = useState<string>(Filter.ALL);
     const [input, setInput] = useState("");
 
-    const filteredTodos = todos.filter((t) => {
-        if (filter === "active") return !t.completed;
-        if (filter === "completed") return t.completed;
+    const filteredTodos = todos.filter((todo) => {
+        if (filter === Filter.ACTIVE) { return !todo.completed; }
+        if (filter === Filter.COMPLETED) { return todo.completed; }
         return true;
     });
 
@@ -50,22 +54,22 @@ const App: React.FC = () => {
                         <span>{itemsLeft} items left</span>
                         <div className="filters">
                             <button
-                                className={filter === "all" ? "selected" : ""}
-                                onClick={() => setFilter("all")}
+                                className={filter === Filter.ALL ? "selected" : ""}
+                                onClick={() => setFilter(Filter.ALL)}
                             >
-                                All
+                                {Filter.ALL}
                             </button>
                             <button
-                                className={filter === "active" ? "selected" : ""}
-                                onClick={() => setFilter("active")}
+                                className={filter === Filter.ACTIVE ? "selected" : ""}
+                                onClick={() => setFilter(Filter.ACTIVE)}
                             >
-                                Active
+                                {Filter.ACTIVE}
                             </button>
                             <button
-                                className={filter === "completed" ? "selected" : ""}
-                                onClick={() => setFilter("completed")}
+                                className={filter === Filter.COMPLETED ? "selected" : ""}
+                                onClick={() => setFilter(Filter.COMPLETED)}
                             >
-                                Completed
+                                {Filter.COMPLETED}
                             </button>
                         </div>
                         <button onClick={clearCompleted}>Clear completed</button>
